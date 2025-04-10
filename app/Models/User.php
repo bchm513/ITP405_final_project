@@ -24,4 +24,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Recipe::class, 'bookmarks');
     }
 
+    protected $fillable = [
+        'name', 
+        'email',
+        'password',
+    ];
+
 }

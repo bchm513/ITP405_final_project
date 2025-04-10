@@ -34,7 +34,6 @@ To do:
     categories page -- list off all recipes + links to them
 
 
-    create repo
     double check requirements
     make it prettier?
     create video

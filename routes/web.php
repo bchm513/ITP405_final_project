@@ -22,10 +22,14 @@ Route::get('/chef-details', [RecipeController::class, 'chefs'])->name('chef-deta
 Route::get('/categories', [RecipeController::class, 'categoryList'])->name('categoryList');
 Route::get('/category-details', [RecipeController::class, 'categories'])->name('category-details');
 
-// users
+// sign/log in
 Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::get('/signup', [UserController::class, 'signup'])->name('signup');
 Route::post('/signupForm', [UserController::class, 'signupForm'])->name('signupForm');
+Route::post('/loginForm', [UserController::class, 'loginForm'])->name('loginForm');
+
+// log out
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 // profile
 Route::get('/profile', [UserController::class, 'profile'])->name('profile');

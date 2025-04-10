@@ -38,7 +38,7 @@
 </head>
 <body>
   <nav class="navbar">
-    <div class="navbar-title">Recipe Project</div>
+    <div class="navbar-title">ITP 405 Final Project</div>
     <div class="navbar-links">
       <a href={{ route('recipe-home') }}>All Recipes</a>
       <a href={{ route('categoryList') }}>Categories</a> 

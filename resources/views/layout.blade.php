@@ -43,9 +43,12 @@
       <a href={{ route('recipe-home') }}>All Recipes</a>
       <a href={{ route('categoryList') }}>Categories</a> 
       <a href={{ route('chefList') }}>Chefs</a> 
-      <a href={{ route('signup') }}>Sign up</a>
-      <a href={{ route('login') }}>Login</a>
-      <a href={{ route('profile') }}>Profile</a>
+      @if (!Auth::user()) 
+        <a href={{ route('signup') }}>Sign up</a>
+        <a href={{ route('login') }}>Login</a>
+      @else 
+        <a href={{ route('profile') }}>Profile</a>
+      @endif
     </div>
   </nav>
 

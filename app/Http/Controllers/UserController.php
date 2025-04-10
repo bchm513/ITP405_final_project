@@ -10,9 +10,13 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function login() {
+
+        // dd(url()->previous());
+        
         if (Auth::user()) {
             return view('profile', [ // always send user information in
                 'user' => Auth::user(),
+                'success' => "Successfully signed up!",
             ])->with('error', "You are signed in!");
         } else { // no one is signed in, sign them up
             return view('login');
@@ -33,10 +37,12 @@ class UserController extends Controller
         ])) { // Login successful
             return view('profile', [ // always send user information in
                 'user' => Auth::user(),
+                'success' => "Successfully logged in!",
             ]);
         } else { // Invalid credentials
-            return view('signup')
-                ->with('error', "No user found. Please sign up!");
+            return view('signup', [
+                'error' => "No user found. Please sign up!"
+            ]);
         }
 
     }
@@ -47,7 +53,7 @@ class UserController extends Controller
                 'user' => Auth::user(),
             ]);
         } else { // no one is signed in, sign them up
-            return view('signup')->with('error', "You are not signed in! Please sign up");
+            return view('signup');
         }
     }
 
@@ -65,8 +71,8 @@ class UserController extends Controller
         $emailCheck = User::where('email', $validated['email'])->first();
 
         if ($emailCheck) { // if the email does exist, it is already in use and can't be used to sign up
-            return redirect()->route('signup')
-                    ->with('error', "That profile has already been taken! Please sign in.");
+            return redirect()->route('login')
+                    ->with('error', "That profile has already been taken! Please log in.");
         } else { // if the email does not exist, it can be used to create a new user
             // dd($emailCheck);
 
@@ -82,6 +88,7 @@ class UserController extends Controller
 
             return view('profile', [
                 'user' => Auth::user(),
+                'success' => "Successfully signed up!",
             ]);
         }      
     }
@@ -95,8 +102,9 @@ class UserController extends Controller
                 'user' => Auth::user(),
             ]);
         } else {
-            return view('signup')
-                ->with('error', "You are not signed in!");
+            return view('signup', [
+                'error' => "You are not signed in! Please sign up!"
+            ]);
         }
     }
 
@@ -106,6 +114,7 @@ class UserController extends Controller
 
         Auth::logout();
 
-        return redirect()->route('login');
+        return redirect()->route('login')
+                ->with('success', "Successfully logged out");
     }
 }

@@ -4,9 +4,29 @@
 
 @section('main')
 
+{{-- setting all the session/isset error and success messages --}}
+
 @if (session('error')) {{-- if the success variable we made in controller has session data, print out the stuff in the div below --}}
     <div class="alert alert-danger" role="alert">
         {{ session('error') }}
+    </div>
+@endif
+
+@if (session('success')) {{-- if the success variable we made in controller has session data, print out the stuff in the div below --}}
+    <div class="alert alert-success" role="alert">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if(isset($error))
+    <div class="alert alert-danger">
+        {{ $error }}
+    </div>
+@endif
+
+@if(isset($success))
+    <div class="alert alert-success">
+        {{ $success }}
     </div>
 @endif
 

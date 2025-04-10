@@ -10,6 +10,12 @@
     </div>
 @endif
 
+@if (session('success')) {{-- if the success variable we made in controller has session data, print out the stuff in the div below --}}
+    <div class="alert alert-success" role="alert">
+        {{ session('success') }}
+    </div>
+@endif
+
 <div style="padding: 20px;">
     <h1>Login</h1>
     <div style="padding: 20px;">

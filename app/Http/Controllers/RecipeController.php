@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Recipe;
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -46,6 +47,14 @@ class RecipeController extends Controller
         // dd($categories);
 
         return view('category-list', ['categories' => $categories]);
+    }
+
+    public function chefList() {
+        
+        $chefs = User::with(['recipes'])->get();
+        // dd($chefs);
+
+        return view('chef-list', ['chefs' => $chefs]);
     }
 
     /**

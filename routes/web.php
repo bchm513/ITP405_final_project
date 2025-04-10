@@ -15,7 +15,7 @@ Route::get('/recipes/{id}', [RecipeController::class, 'show'])->name('recipe-det
 Route::get('/create-recipe', [RecipeController::class, 'goToCreate'])->name('create-recipe');
 
 // chefs
-
+Route::get('/chefs', [RecipeController::class, 'chefList'])->name('chefList');
 Route::get('/chef-details', [RecipeController::class, 'chefs'])->name('chef-details');
 
 // categories

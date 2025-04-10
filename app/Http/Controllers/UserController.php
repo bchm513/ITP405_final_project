@@ -6,5 +6,11 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    //
+    public function login() {
+
+    }
+
+    public function signup() {
+        return view('signup');
+    }
 }

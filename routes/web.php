@@ -14,3 +14,6 @@ Route::get('/create-recipe', [RecipeController::class, 'goToCreate'])->name('cre
 
 Route::get('/chef-details', [RecipeController::class, 'chefs'])->name('chef-details');
 Route::get('/category-details', [RecipeController::class, 'categories'])->name('category-details');
+
+Route::get('/login', [UserController::class, 'login'])->name('login');
+Route::get('/signup', [UserController::class, 'signup'])->name('signup');

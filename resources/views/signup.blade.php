@@ -7,6 +7,7 @@
     <h1>Sign Up</h1>
     <div style="padding: 20px;">
         <form action="{{ route('signupForm') }}" method="POST">
+        <div>
             @csrf
             <label for="content" class="form-label">Input User Information</label>
             <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}">
@@ -23,11 +24,12 @@
             @error ('password') 
                 <small class="text-danger">{{ $message }}</small> 
             @enderror
-
-            <label for="content" class="form-label"></label>
+        </div>
+        <div>
             <button type="submit" class="btn btn-primary">
                 Submit
             </button>
+        <div>
         </form>
     </div>
 </div>

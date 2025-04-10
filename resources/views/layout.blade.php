@@ -11,6 +11,12 @@
       margin: 0;
       padding-top: 60px; /* Space for fixed navbar */
     }
+    .form-control {
+      margin-top: 1rem;
+    }
+    button {
+      margin-top: 1rem;
+    }
     .navbar {
       position: fixed;
       top: 0;

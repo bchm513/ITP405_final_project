@@ -35,7 +35,7 @@
     <div class="navbar-title">Recipe Project</div>
     <div class="navbar-links">
       <a href={{ route('recipe-home') }}>All Recipes</a>
-      <a href={{ route('recipe-home') }}>Categories</a> 
+      <a href={{ route('categoryList') }}>Categories</a> 
       <a href={{ route('recipe-home') }}>Chefs</a> 
       <a href={{ route('signup') }}>Sign up</a>
       <a href={{ route('login') }}>Login</a>

@@ -40,6 +40,14 @@ class RecipeController extends Controller
         return view('category-details');
     }
 
+    public function categoryList() {
+        
+        $categories = Category::all();
+        // dd($categories);
+
+        return view('category-list', ['categories' => $categories]);
+    }
+
     /**
      * Store a newly created resource in storage.
      */

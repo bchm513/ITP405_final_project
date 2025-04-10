@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\RecipeController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -17,3 +18,6 @@ Route::get('/category-details', [RecipeController::class, 'categories'])->name('
 
 Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::get('/signup', [UserController::class, 'signup'])->name('signup');
+Route::post('/signupForm', [UserController::class, 'signupForm'])->name('signupForm');
+
+Route::get('/profile', [UserController::class, 'profile'])->name('profile');

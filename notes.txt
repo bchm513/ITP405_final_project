@@ -11,13 +11,15 @@ To do:
     initial recipe return page
         links to recipes
         links to chef
-        links to categories
-    
+        links to categories  
     sign up (basically add user/chef)
     log in 
     log out
     edit layouts to have nav bar with login info
         (link to profile)
+    chefs page -- list off all their recipes + links to them
+    categories page -- list off all recipes + links to them
+
     profile page
         edit and delete content for logged in users
         see bookmarks
@@ -30,8 +32,7 @@ To do:
         (with validation and everythign else)
     comments for recipe 
         (will return to that recipe with the comments)
-    chefs page -- list off all their recipes + links to them
-    categories page -- list off all recipes + links to them
+    
 
 
     double check requirements

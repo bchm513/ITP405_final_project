@@ -3,7 +3,10 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\RecipeController;
+use App\Http\Controllers\ChefController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -15,12 +18,12 @@ Route::get('/recipes/{id}', [RecipeController::class, 'show'])->name('recipe-det
 Route::get('/create-recipe', [RecipeController::class, 'goToCreate'])->name('create-recipe');
 
 // chefs
-Route::get('/chefs', [RecipeController::class, 'chefList'])->name('chefList');
-Route::get('/chef-details', [RecipeController::class, 'chefs'])->name('chef-details');
+Route::get('/chefs', [UserController::class, 'chefList'])->name('chefList');
+Route::get('/chef-details/{id}', [UserController::class, 'show'])->name('chef-details');
 
 // categories
-Route::get('/categories', [RecipeController::class, 'categoryList'])->name('categoryList');
-Route::get('/category-details', [RecipeController::class, 'categories'])->name('category-details');
+Route::get('/categories', [CategoryController::class, 'categoryList'])->name('categoryList');
+Route::get('/category-details/{id}', [CategoryController::class, 'show'])->name('category-details');
 
 // sign/log in
 Route::get('/login', [UserController::class, 'login'])->name('login');

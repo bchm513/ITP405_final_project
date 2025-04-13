@@ -33,30 +33,6 @@ class RecipeController extends Controller
         return view('create-recipe');
     }
 
-    public function chefs() {
-        return view('chef-details');
-    }
-
-    public function categories() {
-        return view('category-details');
-    }
-
-    public function categoryList() {
-        
-        $categories = Category::all();
-        // dd($categories);
-
-        return view('category-list', ['categories' => $categories]);
-    }
-
-    public function chefList() {
-        
-        $chefs = User::with(['recipes'])->get();
-        // dd($chefs);
-
-        return view('chef-list', ['chefs' => $chefs]);
-    }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -83,9 +59,14 @@ class RecipeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Recipe $recipe)
+    public function show($id)
     {
-        return view('recipe-details');
+        // dd($id);
+        // given the id passed in, return the recipe
+        $recipe = Recipe::find($id);
+        // dd($recipe);
+        
+        return view('recipe-details', ['recipe' => $recipe]);
     }
 
     /**

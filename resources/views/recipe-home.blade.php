@@ -5,7 +5,7 @@
 @section('main')
 
 <h1>Recipe List</h1>
-
+{{-- {{ dd($recipes) }} --}}
 <h3><a href="{{ route('create-recipe') }}">Create Recipe</a></h3>
 <table class="table table-striped">
     <thead>

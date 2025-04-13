@@ -9,6 +9,24 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    public function show($id) {
+
+        // dd($id);
+
+        $chefInfo = User::with(['recipes'])->find($id);
+        // dd($chefInfo);
+
+        return view('chef-details', ['chefInfo' => $chefInfo]);
+    }
+
+    public function chefList() {
+        
+        $chefs = User::with(['recipes'])->get();
+        // dd($chefs);
+
+        return view('chef-list', ['chefs' => $chefs]);
+    }
+    
     public function login() {
 
         // dd(url()->previous());

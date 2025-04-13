@@ -13,5 +13,7 @@
 <p>{{ $recipe->ingredients }}</p>
 <h5>Instructions: </h5>
 <p>{{ $recipe->instructions }}</p>
+<h5>Preparation Time: </h5>
+<p>{{ $recipe->preparation_time }} minutes</p>
 
 {{-- {{ dd($recipe) }} --}}

@@ -11,11 +11,7 @@ use Illuminate\Support\Facades\Gate;
 
 class RecipeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
+    public function index() {
         $recipes = Recipe::with([
             'user:id,name', 
             'category:id,name'
@@ -25,42 +21,9 @@ class RecipeController extends Controller
         return view('recipe-home', [
             'recipes' => $recipes,
         ]);
-
     }
 
-    public function goToCreate()
-    {
-        return view('create-recipe');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'ingredients' => 'required|string',
-            'instructions' => 'required|string',
-            'preparation_time' => 'nullable|integer|min:0',
-            'cooking_time' => 'nullable|integer|min:0',
-            'servings' => 'nullable|integer|min:1',
-            'category_id' => 'nullable|exists:categories,id'
-        ]);
-
-        $recipe = Auth::user()->recipes()->create($validated);
-
-        return redirect()
-                ->route('recipes.show', $recipe)
-                ->with('success', 'Recipe created successfully!');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show($id)
-    {
+    public function show($id) {
         // dd($id);
         // given the id passed in, return the recipe
         $recipe = Recipe::find($id);
@@ -69,56 +32,63 @@ class RecipeController extends Controller
         return view('recipe-details', ['recipe' => $recipe]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Recipe $recipe)
-    {
-        // Authorize using policy
-        $this->authorize('update', $recipe);
+    public function goToCreate() {
 
-        $categories = Category::all();
-        return view('recipes.edit', compact('recipe', 'categories'));
+        return view('create-recipe');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Recipe $recipe)
-    {
-        // Authorize using policy
-        $this->authorize('update', $recipe);
+    public function store(Request $request) {
 
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'ingredients' => 'required|string',
-            'instructions' => 'required|string',
-            'preparation_time' => 'nullable|integer|min:0',
-            'cooking_time' => 'nullable|integer|min:0',
-            'servings' => 'nullable|integer|min:1',
-            'category_id' => 'nullable|exists:categories,id'
-        ]);
+        // $validated = $request->validate([
+        //     'title' => 'required|string|max:255',
+        //     'description' => 'required|string',
+        //     'ingredients' => 'required|string',
+        //     'instructions' => 'required|string',
+        //     'preparation_time' => 'required|integer|min:0',
+        //     'cooking_time' => 'required|integer|min:0',
+        //     'servings' => 'required|integer|min:1',
+        //     'category_id' => 'required|exists:categories,id'
+        // ]);
 
-        $recipe->update($validated);
+        // $recipe = Auth::user()->recipes()->create($validated);
 
-        return redirect()
-                ->route('recipes.show', $recipe)
-                ->with('success', 'Recipe updated successfully!');
+        // return redirect()
+        //         ->route('recipes.show', $recipe)
+        //         ->with('success', 'Recipe created successfully!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Recipe $recipe)
-    {
+    public function edit(Request $request, Recipe $recipe) {
+
         // Authorize using policy
-        $this->authorize('delete', $recipe);
+        // $this->authorize('update', $recipe);
 
-        $recipe->delete();
+        // $validated = $request->validate([
+        //     'title' => 'required|string|max:255',
+        //     'description' => 'nullable|string',
+        //     'ingredients' => 'required|string',
+        //     'instructions' => 'required|string',
+        //     'preparation_time' => 'nullable|integer|min:0',
+        //     'cooking_time' => 'nullable|integer|min:0',
+        //     'servings' => 'nullable|integer|min:1',
+        //     'category_id' => 'nullable|exists:categories,id'
+        // ]);
 
-        return redirect()
-                ->route('home')
-                ->with('success', 'Recipe deleted successfully!');
+        // $recipe->update($validated);
+
+        // return redirect()
+        //         ->route('recipes.show', $recipe)
+        //         ->with('success', 'Recipe updated successfully!');
     }
+
+    public function delete(Recipe $recipe) {
+        // Authorize using policy
+        // $this->authorize('delete', $recipe);
+
+        // $recipe->delete();
+
+        // return redirect()
+        //         ->route('home')
+        //         ->with('success', 'Recipe deleted successfully!');
+    }
+
 }

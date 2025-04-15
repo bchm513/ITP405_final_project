@@ -22,6 +22,9 @@ To do:
 
     profile page
         edit and delete content for logged in users
+        see my own recipes 
+            creating
+            deleting and editing
         see bookmarks
     view recipe -- has all recipe table info + comments about that recipe
         has option to bookmark if user is logged in

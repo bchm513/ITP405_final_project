@@ -16,10 +16,19 @@
 @else
     @foreach ($bookmarks as $bookmark)
         <h5><a href="{{route('recipe-details', ['id' => $bookmark->id]) }}">{{ $bookmark->title }}</a></h5>
-        <p>Delete Bookmark</p>
+        <p><a href="{{ route('deleteBookmarks', ['userId' => Auth::user()->id, 'recipeId' => $bookmark->id]) }}">Delete Bookmark</a></p>
     @endforeach
 @endif
 
-{{-- list off bookmarks --}}
-{{-- list off recipes --}}
+@if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
 

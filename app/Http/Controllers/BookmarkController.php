@@ -39,4 +39,19 @@ class BookmarkController extends Controller
         return back()->with('success', 'Recipe bookmarked successfully!');
 
     }
+
+    public function deleteBookmarks($userId, $recipeId) {
+        // dd($userId);
+
+        // use where clauses with ids and then delete
+        $deleted = Bookmark::where('user_id', $userId)->where('recipe_id', $recipeId)->delete();
+
+        // Check if anything was deleted
+        if ($deleted) {
+            return back()->with('success', 'Bookmark removed!');
+        }
+
+        return back()->with('error', 'Bookmark not found!');
+
+    }
 }

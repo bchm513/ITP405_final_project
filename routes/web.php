@@ -28,7 +28,7 @@ Route::get('/category-details/{id}', [CategoryController::class, 'show'])->name(
 
 // bookmarks
 Route::get('/createBookmarks/userId={userId}+recipeId={recipeId}', [BookmarkController::class, 'createBookmarks'])->name('createBookmarks');
-Route::post('/createBookmarks', [BookmarkController::class, 'store'])->name('storeBookmarks');
+Route::get('/deleteBookmarks/userId={userId}+recipeId={recipeId}', [BookmarkController::class, 'deleteBookmarks'])->name('deleteBookmarks');
 
 // sign/log in
 Route::get('/login', [UserController::class, 'login'])->name('login');

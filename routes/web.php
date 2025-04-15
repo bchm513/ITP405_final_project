@@ -6,6 +6,7 @@ use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\ChefController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BookmarkController;
 
 
 Route::get('/', function () {
@@ -24,6 +25,10 @@ Route::get('/chef-details/{id}', [UserController::class, 'show'])->name('chef-de
 // categories
 Route::get('/categories', [CategoryController::class, 'categoryList'])->name('categoryList');
 Route::get('/category-details/{id}', [CategoryController::class, 'show'])->name('category-details');
+
+// bookmarks
+Route::get('/createBookmarks/userId={userId}+recipeId={recipeId}', [BookmarkController::class, 'createBookmarks'])->name('createBookmarks');
+Route::post('/createBookmarks', [BookmarkController::class, 'store'])->name('storeBookmarks');
 
 // sign/log in
 Route::get('/login', [UserController::class, 'login'])->name('login');

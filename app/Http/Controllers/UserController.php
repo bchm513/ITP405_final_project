@@ -53,8 +53,14 @@ class UserController extends Controller
             'email' => $validated['email'],
             'password' => $validated['password'] 
         ])) { // Login successful
+            
+            $userInfo = User::with(['bookmarks', 'recipes'])->find(auth()->id()); // Cleaner for primary key lookup
+            $bookmarks = $userInfo->bookmarks;
+            // dd($bookmarks);
+
             return view('profile', [ // always send user information in
                 'user' => Auth::user(),
+                'bookmarks' => $bookmarks,
                 'success' => "Successfully logged in!",
             ]);
         } else { // Invalid credentials
@@ -116,8 +122,14 @@ class UserController extends Controller
         // dd(Auth::user());
 
         if (Auth::user()) { // if there is a user (someone logged in)
+
+            $userInfo = User::with(['bookmarks', 'recipes'])->find(auth()->id()); // Cleaner for primary key lookup
+            $bookmarks = $userInfo->bookmarks;
+            // dd($bookmarks);
+
             return view('profile', [ // always send user information in
                 'user' => Auth::user(),
+                'bookmarks' => $bookmarks,
             ]);
         } else {
             return view('signup', [

@@ -37,7 +37,7 @@ To do:
         (will return to that recipe with the comments)
     
 
-
+    add images?
     double check requirements
     make it prettier?
     create video

@@ -34,21 +34,47 @@ class RecipeController extends Controller
 
     public function goToCreate() {
 
-        return view('create-recipe');
+        $categories = Category::all();
+        // dd($categories);
+
+        return view('create-recipe', ['categories' => $categories]);
     }
 
     public function store(Request $request) {
 
-        // $validated = $request->validate([
-        //     'title' => 'required|string|max:255',
-        //     'description' => 'required|string',
-        //     'ingredients' => 'required|string',
-        //     'instructions' => 'required|string',
-        //     'preparation_time' => 'required|integer|min:0',
-        //     'cooking_time' => 'required|integer|min:0',
-        //     'servings' => 'required|integer|min:1',
-        //     'category_id' => 'required|exists:categories,id'
-        // ]);
+        // dd($request);
+
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'ingredients' => 'required|string',
+            'instructions' => 'required|string',
+            'preparation_time' => 'required|integer|min:0',
+            'cooking_time' => 'required|integer|min:0',
+            'servings' => 'required|integer|min:1',
+            'category_id' => 'required|exists:categories,id'
+        ]);
+
+        // dd(Auth::user()->id);
+
+        
+        // Create recipe with authenticated user
+        $newRecipe = Recipe::create([
+            'user_id' => Auth::user()->id, // Automatically assign current user
+            'title' => $validated['title'],
+            'description' => $validated['description'],
+            'ingredients' => $validated['ingredients'],
+            'instructions' => $validated['instructions'],
+            'preparation_time' => $validated['preparation_time'],
+            'cooking_time' => $validated['cooking_time'],
+            'servings' => $validated['servings'],
+            'category_id' => $validated['category_id']
+        ]);
+        
+        
+        // dd($newRecipe);
+
+        return redirect()->route('recipe-home')->with('success', 'Recipe created successfully!');
 
         // $recipe = Auth::user()->recipes()->create($validated);
 

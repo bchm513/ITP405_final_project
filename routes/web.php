@@ -7,6 +7,7 @@ use App\Http\Controllers\ChefController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BookmarkController;
+use App\Http\Middleware\UserLoggedIn;
 
 
 Route::get('/', function () {
@@ -16,10 +17,11 @@ Route::get('/', function () {
 // recipes
 Route::get('/recipe-home', [RecipeController::class, 'index'])->name('recipe-home');
 Route::get('/recipes/{id}', [RecipeController::class, 'show'])->name('recipe-details');
-Route::get('/create-recipe', [RecipeController::class, 'goToCreate'])->name('create-recipe');
-Route::post('/store-recipe', [RecipeController::class, 'store'])->name('store-recipe');
-Route::post('/edit-recipe', [RecipeController::class, 'edit'])->name('edit-recipe');
-Route::post('/delete-recipe', [RecipeController::class, 'edit'])->name('delete-recipe');
+
+Route::get('/create-recipe', [RecipeController::class, 'goToCreate'])->middleware(UserLoggedIn::class)->name('create-recipe');
+Route::post('/store-recipe', [RecipeController::class, 'store'])->middleware(UserLoggedIn::class)->name('store-recipe');
+Route::post('/edit-recipe', [RecipeController::class, 'edit'])->middleware(UserLoggedIn::class)->name('edit-recipe');
+Route::post('/delete-recipe', [RecipeController::class, 'edit'])->middleware(UserLoggedIn::class)->name('delete-recipe');
 
 // chefs
 Route::get('/chefs', [UserController::class, 'chefList'])->name('chefList');

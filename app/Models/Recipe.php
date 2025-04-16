@@ -22,4 +22,16 @@ class Recipe extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    protected $fillable = [
+        'user_id', 
+        'title',
+        'description',
+        'ingredients',
+        'instructions',
+        'preparation_time',
+        'cooking_time',
+        'servings',
+        'category_id'
+    ];
 }

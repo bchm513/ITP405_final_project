@@ -83,38 +83,54 @@ class RecipeController extends Controller
         //         ->with('success', 'Recipe created successfully!');
     }
 
-    public function edit(Request $request, Recipe $recipe) {
+    public function goToEdit($id) {
 
-        // Authorize using policy
-        // $this->authorize('update', $recipe);
+        $recipe = Recipe::find($id);// generate recipe from id
+        // dd($recipe);
+        $categories = Category::all(); // generate categories too
 
-        // $validated = $request->validate([
-        //     'title' => 'required|string|max:255',
-        //     'description' => 'nullable|string',
-        //     'ingredients' => 'required|string',
-        //     'instructions' => 'required|string',
-        //     'preparation_time' => 'nullable|integer|min:0',
-        //     'cooking_time' => 'nullable|integer|min:0',
-        //     'servings' => 'nullable|integer|min:1',
-        //     'category_id' => 'nullable|exists:categories,id'
-        // ]);
+        return view('recipe-edit', ['recipe' => $recipe, 'categories' => $categories]);
 
-        // $recipe->update($validated);
-
-        // return redirect()
-        //         ->route('recipes.show', $recipe)
-        //         ->with('success', 'Recipe updated successfully!');
     }
 
-    public function delete(Recipe $recipe) {
-        // Authorize using policy
-        // $this->authorize('delete', $recipe);
+    public function edit(Request $request) {
 
-        // $recipe->delete();
+        // dd($request->recipe_id);
 
-        // return redirect()
-        //         ->route('home')
-        //         ->with('success', 'Recipe deleted successfully!');
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'ingredients' => 'required|string',
+            'instructions' => 'required|string',
+            'preparation_time' => 'nullable|integer|min:0',
+            'cooking_time' => 'nullable|integer|min:0',
+            'servings' => 'nullable|integer|min:1',
+            'category_id' => 'nullable|exists:categories,id'
+        ]);
+
+        // dd($validated);
+
+        $recipeToEdit = Recipe::find($request->recipe_id); // find the recipe given the id
+        // dd($recipeToEdit);
+
+        $recipeToEdit->update(collect($validated)->except('id')->all()); // update all the fields except for id
+        // dd($recipeToEdit);
+
+        return redirect()->route('profile', )
+                ->with('success', 'Recipe updated successfully!');
+    }
+
+    public function delete($id) {
+        
+        // all authentication would have already happened so no issue there
+        // dd($id);
+        $recipeToDelete = Recipe::find($id);
+        // dd($recipeToDelete);
+
+        $recipeToDelete->delete();
+
+        return redirect()->route('profile')
+                ->with('success', 'Recipe deleted successfully!');
     }
 
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Auth;
+use App\Models\Recipe;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -56,11 +57,13 @@ class UserController extends Controller
             
             $userInfo = User::with(['bookmarks', 'recipes'])->find(auth()->id()); // Cleaner for primary key lookup
             $bookmarks = $userInfo->bookmarks;
-            // dd($bookmarks);
+            $recipes = Recipe::where('user_id', auth()->id())->get();
+            // dd($recipes);
 
             return view('profile', [ // always send user information in
                 'user' => Auth::user(),
                 'bookmarks' => $bookmarks,
+                'recipes' => $recipes,
                 'success' => "Successfully logged in!",
             ]);
         } else { // Invalid credentials
@@ -125,11 +128,13 @@ class UserController extends Controller
 
             $userInfo = User::with(['bookmarks', 'recipes'])->find(auth()->id()); // Cleaner for primary key lookup
             $bookmarks = $userInfo->bookmarks;
+            $recipes = Recipe::where('user_id', auth()->id())->get();
             // dd($bookmarks);
 
             return view('profile', [ // always send user information in
                 'user' => Auth::user(),
                 'bookmarks' => $bookmarks,
+                'recipes' => $recipes,
             ]);
         } else {
             return view('signup', [

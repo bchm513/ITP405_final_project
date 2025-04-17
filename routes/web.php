@@ -20,8 +20,9 @@ Route::get('/recipes/{id}', [RecipeController::class, 'show'])->name('recipe-det
 
 Route::get('/create-recipe', [RecipeController::class, 'goToCreate'])->middleware(UserLoggedIn::class)->name('create-recipe');
 Route::post('/store-recipe', [RecipeController::class, 'store'])->middleware(UserLoggedIn::class)->name('store-recipe');
+Route::get('/go-to-edit-recipe/{id}', [RecipeController::class, 'goToEdit'])->middleware(UserLoggedIn::class)->name('go-to-edit-recipe');
 Route::post('/edit-recipe', [RecipeController::class, 'edit'])->middleware(UserLoggedIn::class)->name('edit-recipe');
-Route::post('/delete-recipe', [RecipeController::class, 'edit'])->middleware(UserLoggedIn::class)->name('delete-recipe');
+Route::get('/delete-recipe/{id}', [RecipeController::class, 'delete'])->middleware(UserLoggedIn::class)->name('delete-recipe');
 
 // chefs
 Route::get('/chefs', [UserController::class, 'chefList'])->name('chefList');

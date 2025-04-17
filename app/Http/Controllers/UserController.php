@@ -55,7 +55,7 @@ class UserController extends Controller
             'password' => $validated['password'] 
         ])) { // Login successful
             
-            $userInfo = User::with(['bookmarks', 'recipes'])->find(auth()->id()); // Cleaner for primary key lookup
+            $userInfo = User::with(['bookmarks', 'recipes'])->find(auth()->id()); 
             $bookmarks = $userInfo->bookmarks;
             $recipes = Recipe::where('user_id', auth()->id())->get();
             // dd($recipes);
@@ -76,8 +76,15 @@ class UserController extends Controller
 
     public function signup() {
         if (Auth::user()) {
+
+            $userInfo = User::with(['bookmarks', 'recipes'])->find(auth()->id()); 
+            $bookmarks = $userInfo->bookmarks;
+            $recipes = Recipe::where('user_id', auth()->id())->get();
+
             return view('profile', [ // always send user information in
                 'user' => Auth::user(),
+                'bookmarks' => $bookmarks,
+                'recipes' => $recipes,
             ]);
         } else { // no one is signed in, sign them up
             return view('signup');
@@ -112,9 +119,14 @@ class UserController extends Controller
             // dd($newUser);
 
             Auth::login($newUser); // log in the user after they sign up
+            $userInfo = User::with(['bookmarks', 'recipes'])->find(auth()->id()); 
+            $bookmarks = $userInfo->bookmarks;
+            $recipes = Recipe::where('user_id', auth()->id())->get();
 
             return view('profile', [
                 'user' => Auth::user(),
+                'bookmarks' => $bookmarks,
+                'recipes' => $recipes,                
                 'success' => "Successfully signed up!",
             ]);
         }      
@@ -126,7 +138,7 @@ class UserController extends Controller
 
         if (Auth::user()) { // if there is a user (someone logged in)
 
-            $userInfo = User::with(['bookmarks', 'recipes'])->find(auth()->id()); // Cleaner for primary key lookup
+            $userInfo = User::with(['bookmarks', 'recipes'])->find(auth()->id()); 
             $bookmarks = $userInfo->bookmarks;
             $recipes = Recipe::where('user_id', auth()->id())->get();
             // dd($bookmarks);

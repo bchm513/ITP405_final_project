@@ -19,22 +19,20 @@ To do:
         (link to profile)
     chefs page -- list off all their recipes + links to them
     categories page -- list off all recipes + links to them
-
     profile page
         edit and delete content for logged in users
         see my own recipes 
             creating
             deleting and editing
         see bookmarks
-    view recipe -- has all recipe table info + comments about that recipe
-        has option to bookmark if user is logged in
-        (link to comments for the recipe)
-        (link to edit and delete if they are logged in, otherwise return to same page)
-        (link to chef page)
     create recipe form 
         (with validation and everythign else)
     comments for recipe 
         (will return to that recipe with the comments)
+    view recipe -- has all recipe table info + comments about that recipe
+        has option to bookmark if user is logged in
+        (link to comments for the recipe)
+        (link to chef page)
     
 
     add images?

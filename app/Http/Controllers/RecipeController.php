@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Recipe;
 use App\Models\Category;
 use App\Models\User;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -26,10 +27,11 @@ class RecipeController extends Controller
     public function show($id) {
         // dd($id);
         // given the id passed in, return the recipe
-        $recipe = Recipe::find($id);
-        // dd($recipe);
+        $recipe = Recipe::with('comments')->find($id);
+        $comments = Comment::with(['user'])->where('recipe_id', $recipe->id)->get();
+        // dd($comments);
         
-        return view('recipe-details', ['recipe' => $recipe]);
+        return view('recipe-details', ['recipe' => $recipe, 'comments' => $comments]);
     }
 
     public function goToCreate() {

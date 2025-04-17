@@ -13,4 +13,11 @@ class Comment extends Model
     public function recipe() {
         return $this->belongsTo(Recipe::class);
     }
+
+    protected $fillable = [
+        'user_id', 
+        'recipe_id',
+        'content',
+        'rating',
+    ];
 }

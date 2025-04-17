@@ -7,6 +7,8 @@ use App\Http\Controllers\ChefController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BookmarkController;
+use App\Http\Controllers\CommentController;
+
 use App\Http\Middleware\UserLoggedIn;
 
 
@@ -17,7 +19,6 @@ Route::get('/', function () {
 // recipes
 Route::get('/recipe-home', [RecipeController::class, 'index'])->name('recipe-home');
 Route::get('/recipes/{id}', [RecipeController::class, 'show'])->name('recipe-details');
-
 Route::get('/create-recipe', [RecipeController::class, 'goToCreate'])->middleware(UserLoggedIn::class)->name('create-recipe');
 Route::post('/store-recipe', [RecipeController::class, 'store'])->middleware(UserLoggedIn::class)->name('store-recipe');
 Route::get('/go-to-edit-recipe/{id}', [RecipeController::class, 'goToEdit'])->middleware(UserLoggedIn::class)->name('go-to-edit-recipe');
@@ -35,6 +36,10 @@ Route::get('/category-details/{id}', [CategoryController::class, 'show'])->name(
 // bookmarks
 Route::get('/createBookmarks/userId={userId}+recipeId={recipeId}', [BookmarkController::class, 'createBookmarks'])->name('createBookmarks');
 Route::get('/deleteBookmarks/userId={userId}+recipeId={recipeId}', [BookmarkController::class, 'deleteBookmarks'])->name('deleteBookmarks');
+
+// comments
+Route::get('/go-to-add-comment/userId={userId}+recipeId={recipeId}', [CommentController::class, 'goToComment'])->middleware(UserLoggedIn::class)->name('go-to-add-comment');
+Route::post('/add-comment', [CommentController::class, 'addComment'])->middleware(UserLoggedIn::class)->name('add-comment');
 
 // sign/log in
 Route::get('/login', [UserController::class, 'login'])->name('login');

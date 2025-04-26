@@ -40,6 +40,9 @@ Route::get('/deleteBookmarks/userId={userId}+recipeId={recipeId}', [BookmarkCont
 // comments
 Route::get('/go-to-add-comment/userId={userId}+recipeId={recipeId}', [CommentController::class, 'goToComment'])->middleware(UserLoggedIn::class)->name('go-to-add-comment');
 Route::post('/add-comment', [CommentController::class, 'addComment'])->middleware(UserLoggedIn::class)->name('add-comment');
+Route::get('/go-to-edit-comment/commentId={commentId}', [CommentController::class, 'goToEdit'])->middleware(UserLoggedIn::class)->name('go-to-edit-comment');
+Route::post('/edit-comment', [CommentController::class, 'editComment'])->middleware(UserLoggedIn::class)->name('edit-comment');
+Route::get('/deleteComments/commentId={commentId}', [CommentController::class, 'deleteComments'])->name('deleteComments');
 
 // sign/log in
 Route::get('/login', [UserController::class, 'login'])->name('login');

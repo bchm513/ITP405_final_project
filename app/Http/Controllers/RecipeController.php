@@ -28,7 +28,7 @@ class RecipeController extends Controller
         // dd($id);
         // given the id passed in, return the recipe
         $recipe = Recipe::with('comments')->find($id);
-        $comments = Comment::with(['user'])->where('recipe_id', $recipe->id)->get();
+        $comments = Comment::with(['user'])->where('recipe_id', $recipe->id)->orderBy('created_at', 'desc')->get(); // most recent to oldest
         // dd($comments);
         
         return view('recipe-details', ['recipe' => $recipe, 'comments' => $comments]);
@@ -78,11 +78,6 @@ class RecipeController extends Controller
 
         return redirect()->route('recipe-home')->with('success', 'Recipe created successfully!');
 
-        // $recipe = Auth::user()->recipes()->create($validated);
-
-        // return redirect()
-        //         ->route('recipes.show', $recipe)
-        //         ->with('success', 'Recipe created successfully!');
     }
 
     public function goToEdit($id) {

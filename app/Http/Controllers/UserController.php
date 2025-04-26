@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Auth;
 use App\Models\Recipe;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -59,11 +60,13 @@ class UserController extends Controller
             $bookmarks = $userInfo->bookmarks;
             $recipes = Recipe::where('user_id', auth()->id())->get();
             // dd($recipes);
+            $comments = Comment::with(['recipe'])->where('user_id', auth()->id())->get();
 
             return view('profile', [ // always send user information in
                 'user' => Auth::user(),
                 'bookmarks' => $bookmarks,
                 'recipes' => $recipes,
+                'comments' => $comments,
                 'success' => "Successfully logged in!",
             ]);
         } else { // Invalid credentials
@@ -80,11 +83,13 @@ class UserController extends Controller
             $userInfo = User::with(['bookmarks', 'recipes'])->find(auth()->id()); 
             $bookmarks = $userInfo->bookmarks;
             $recipes = Recipe::where('user_id', auth()->id())->get();
+            $comments = Comment::with(['recipe'])->where('user_id', auth()->id())->get();
 
             return view('profile', [ // always send user information in
                 'user' => Auth::user(),
                 'bookmarks' => $bookmarks,
                 'recipes' => $recipes,
+                'comments' => $comments,
             ]);
         } else { // no one is signed in, sign them up
             return view('signup');
@@ -122,11 +127,13 @@ class UserController extends Controller
             $userInfo = User::with(['bookmarks', 'recipes'])->find(auth()->id()); 
             $bookmarks = $userInfo->bookmarks;
             $recipes = Recipe::where('user_id', auth()->id())->get();
+            $comments = Comment::with(['recipe'])->where('user_id', auth()->id())->get();
 
             return view('profile', [
                 'user' => Auth::user(),
                 'bookmarks' => $bookmarks,
-                'recipes' => $recipes,                
+                'recipes' => $recipes,     
+                'comments' => $comments,     
                 'success' => "Successfully signed up!",
             ]);
         }      
@@ -142,11 +149,13 @@ class UserController extends Controller
             $bookmarks = $userInfo->bookmarks;
             $recipes = Recipe::where('user_id', auth()->id())->get();
             // dd($bookmarks);
+            $comments = Comment::with(['recipe'])->where('user_id', auth()->id())->get();
 
             return view('profile', [ // always send user information in
                 'user' => Auth::user(),
                 'bookmarks' => $bookmarks,
                 'recipes' => $recipes,
+                'comments' => $comments,
             ]);
         } else {
             return view('signup', [

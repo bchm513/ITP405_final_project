@@ -22,7 +22,8 @@
     {{-- {{ dd($comments); }} --}}
     @if (count($comments) > 0)
         @foreach ($comments as $comment)
-            <p>{{ $comment->rating }} &#9733 {{ $comment->content }} --{{ $comment->user->name }}</p>
+            <p>{{ $comment->rating }} &#9733 {{ $comment->content }} --<b>{{ $comment->user->name }}</b>, {{ new DateTime($comment->created_at)->format('H:i m-d-Y');
+            }}</p>
         @endforeach
     @else
         <p>No Comments Yet!</p>

@@ -39,4 +39,49 @@ class CommentController extends Controller
                          ->with('success', 'Thank you for your review!');
 
     }
+
+    public function deleteComments($commentId) {
+
+        // dd($commentId);
+        $deleted = Comment::where('id', $commentId)->delete();
+
+        // Check if anything was deleted
+        if ($deleted) {
+            return back()->with('success', 'Bookmark removed!');
+        }
+
+        return back()->with('error', 'Bookmark not found!');
+    }
+
+    public function goToEdit($commentId) {
+
+        // dd($commentId);
+        $comment = Comment::with(['recipe'])->find($commentId); // generate comment from id
+        // dd($comment);
+
+        return view('comment-edit', ['comment' => $comment]);
+
+    }
+
+    public function editComment(Request $request) {
+        
+        
+        $validated = $request->validate([
+            'comment_id' => 'required|exists:comments,id',
+            'recipe_id' => 'required|exists:recipes,id',
+            'rating' => 'required|integer|min:1|max:5',
+            'content' => 'required|string|max:1000'
+        ]);
+        // dd($validated);
+
+        $commentToEdit = Comment::find($validated['comment_id']); // find the comment given the id
+        // dd($commentToEdit);
+
+        $commentToEdit->update(collect($validated)->except('comment_id')->all()); // update all the fields except for id
+        // dd($commentToEdit);
+
+        return redirect()->route('profile', )
+                ->with('success', 'Comment updated successfully!');
+
+    }
 }

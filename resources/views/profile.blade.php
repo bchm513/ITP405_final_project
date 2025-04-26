@@ -34,6 +34,21 @@
         @endforeach
     @endif
 
+    <h2>Comments</h2>
+    {{-- {{ dd($comments); }} --}}
+
+    @if ($comments->isEmpty()) {{-- if the user has no bookmarks --}}
+        <p>You have no comments! <a href="{{ route('recipe-home') }}">Go to Recipes</a></p>   
+    @else
+        {{-- {{ dd($comments) }} --}}
+        @foreach ($comments as $comment)
+            <h5><a href="{{route('recipe-details', ['id' => $comment->recipe_id]) }}">{{ $comment->rating }} &#9733 {{ $comment->recipe->title }}: {{ $comment->content }}</a></h5>
+            <p><a href="{{ route('go-to-edit-comment', ['userId' => Auth::user()->id, 'commentId' => $comment->id]) }}">Edit Comment</a></p>
+            <p><a href="{{ route('deleteComments', ['commentId' => $comment->id]) }}">Delete Comment</a></p>
+        @endforeach
+    @endif
+
+
     @if (session('error'))
         <div class="alert alert-danger">
             {{ session('error') }}

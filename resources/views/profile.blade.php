@@ -29,7 +29,8 @@
         <p>You have no bookmarks! <a href="{{ route('recipe-home') }}">Go to Recipes</a></p>   
     @else
         @foreach ($bookmarks as $bookmark)
-            <h5><a href="{{route('recipe-details', ['id' => $bookmark->id]) }}">{{ $bookmark->title }}</a></h5>
+            {{-- {{ dd($bookmark) }} --}}
+            <h5><a href="{{route('recipe-details', ['id' => $bookmark->id]) }}">{{ $bookmark->title }}</a>: Bookmarked {{ new DateTime($bookmark->created_at)->format('H:i m-d-Y') }}</h5>
             <p><a href="{{ route('deleteBookmarks', ['userId' => Auth::user()->id, 'recipeId' => $bookmark->id]) }}">Delete Bookmark</a></p>
         @endforeach
     @endif
@@ -42,7 +43,7 @@
     @else
         {{-- {{ dd($comments) }} --}}
         @foreach ($comments as $comment)
-            <h5><a href="{{route('recipe-details', ['id' => $comment->recipe_id]) }}">{{ $comment->rating }} &#9733 {{ $comment->recipe->title }}: {{ $comment->content }}</a></h5>
+            <h5><a href="{{route('recipe-details', ['id' => $comment->recipe_id]) }}">{{ $comment->rating }} &#9733 {{ $comment->recipe->title }}: {{ $comment->content }} </a>: Commented {{ new DateTime($comment->created_at)->format('H:i m-d-Y') }}</h5>
             <p><a href="{{ route('go-to-edit-comment', ['userId' => Auth::user()->id, 'commentId' => $comment->id]) }}">Edit Comment</a></p>
             <p><a href="{{ route('deleteComments', ['commentId' => $comment->id]) }}">Delete Comment</a></p>
         @endforeach

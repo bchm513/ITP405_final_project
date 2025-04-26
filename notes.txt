@@ -34,9 +34,6 @@ To do:
         (link to comments for the recipe)
         (link to chef page)
     
-
-    add images?
-    double check requirements
     make it prettier?
     create video
 

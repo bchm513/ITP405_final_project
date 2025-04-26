@@ -4,15 +4,13 @@
 
 @section('main')
 
-<h1>Edit Recipe</h1>
-
 {{-- {{ dd($recipe) }} --}}
 
 <div class="container">
-    
+    <h1>Edit Recipe</h1>
+
     <form method="POST" action="{{ route('edit-recipe') }}">
         @csrf
-
         {{-- Hidden id for editing --}}
         <input type="hidden" name="recipe_id" value="{{ $recipe->id }}">
 

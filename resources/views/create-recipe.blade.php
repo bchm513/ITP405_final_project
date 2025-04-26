@@ -9,7 +9,6 @@
 {{-- {{ dd($categories) }} --}}
 
 <div class="container">
-    
     <form method="POST" action="{{ route('store-recipe') }}">
         @csrf
 

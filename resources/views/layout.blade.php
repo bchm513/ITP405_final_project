@@ -51,7 +51,6 @@
       @endif
     </div>
   </nav>
-
   <div>
     @yield('main')
   </div>

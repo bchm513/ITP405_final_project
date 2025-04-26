@@ -30,7 +30,7 @@
     @else
         @foreach ($bookmarks as $bookmark)
             {{-- {{ dd($bookmark) }} --}}
-            <h5><a href="{{route('recipe-details', ['id' => $bookmark->id]) }}">{{ $bookmark->title }}</a>: Bookmarked {{ new DateTime($bookmark->created_at)->format('H:i m-d-Y') }}</h5>
+            <h5><a href="{{route('recipe-details', ['id' => $bookmark->id]) }}">{{ $bookmark->title }}</a>, {{ $bookmark->description }}: Bookmarked {{ new DateTime($bookmark->created_at)->format('H:i m-d-Y') }}</h5>
             <p><a href="{{ route('deleteBookmarks', ['userId' => Auth::user()->id, 'recipeId' => $bookmark->id]) }}">Delete Bookmark</a></p>
         @endforeach
     @endif
